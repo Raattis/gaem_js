@@ -68,7 +68,6 @@ app.post('/makeBullet', function (req, res) {
 app.get('/getGameState', function (req, res) {
     var gameStateString = JSON.stringify(gameState);
     res.send(gameStateString);
-    //console.log('/getGameState response: ' + gameStateString);
 });
 app.get('/newPlayer/:playerName', function (req, res) {
     var name = req.params["playerName"];
