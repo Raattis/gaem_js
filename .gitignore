@@ -106,7 +106,7 @@ dist
 # TernJS port file
 .tern-port
 
-#production
+# production
 /build
 
 # misc
@@ -120,4 +120,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
+# permanent run-time state
+/state

@@ -1,0 +1,2 @@
+docker volume create gaem_js_log_volume
+docker volume create gaem_js_state_volume

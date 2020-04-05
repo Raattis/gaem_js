@@ -248,6 +248,11 @@ export default class App extends Component {
       <div>
         <h1>Welcome to The Game</h1>
         {
+          !gameState && !this._updating &&
+          <p>Couldn't fetch game state. Is the server running?</p>
+        }
+
+        {
           gameState &&
           <AddNewPlayerForm onSubmit={this.makePlayer} />
         }

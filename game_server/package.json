@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@types/body-parser": "^1.19.0",
+    "@types/reflect-metadata": "^0.1.0",
     "body-parser": "^1.19.0",
     "ts-express": "^1.0.3",
     "typescript": "^3.8.3"

@@ -1,0 +1,1 @@
+docker run --rm -it --name gaem_js_server_container -v gaem_js_log_volume:/gaem_js/log -v gaem_js_state_volume:/gaem_js/state -p 8081:8081 gaem_js_img  sh -c "/gaem_js/start_server.sh"
