@@ -16,7 +16,7 @@ const facingDir = (facing) => {
   return { fx, fy };
 };
 
-const tilePixelPos = (x: number, y: number) => {
+const tilePixelPos = (x, y) => {
   return { px: x * 40, py: y * 40 };
 }
 
