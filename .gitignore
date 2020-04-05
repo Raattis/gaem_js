@@ -107,7 +107,6 @@ dist
 .tern-port
 
 # production
-/build
 */build
 
 # misc
