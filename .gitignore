@@ -108,6 +108,7 @@ dist
 
 # production
 /build
+game_server/build/game_server.js
 
 # misc
 .DS_Store

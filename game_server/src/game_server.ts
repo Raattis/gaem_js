@@ -205,49 +205,35 @@ app.get('/newPlayer/:playerName', (req, res) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class ListItem {
-    key: number = 0;
-    name: string = "";
-    done: boolean = false;
-}
+const portToList = 8081;
 
-let allListItems: Map<string, ListItem[]> = new Map<string, ListItem[]>();
-
-app.post('/listItemsToServer/:listName', (req, res) => {
-    const listName: string = req.params['listName'];
-    const listItems: ListItem[] = req.body;
-    allListItems.set(listName, listItems);
-    res.send(JSON.stringify(listItems));
-    log('/listItemsToServer/:listName response to ' + listName + ' <= ' + req.body + ' > ' + JSON.stringify(listItems));
-});
-
-app.get('/listItems/:listName', (req, res) => {
-    const listName: string = req.params['listName'];
-    let listItems: ListItem[] | undefined = allListItems.get(listName);
-    if (!listItems) {
-        listItems = [];
-        allListItems.set(listName, listItems);
-    }
-
-    res.send(JSON.stringify(listItems));
-    log('/listItems/:listName response to ' + listName + ' > ' + JSON.stringify(listItems));
-});
 
 app.get('/', (req, res) => {
-    let output: string = "<h1>Server running!</h1><p>Connect with the <b>gaem_js_client</b></p><ul>\n";
-    logMessages.slice(-10).forEach(e => {
-        output += "<li>[";
-        output += e.t.toISOString().replace('T', ' ').slice(0, -5);
-        output += "] "
-        output += e.m;
-        output += "</li>";
+    const escapeHtml = (s: string) => {
+        return s
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    let output = "";
+    output += `<!DOCTYPE html>\n<html>\n<head><title>server@${portToList}</title></head>\n`;
+    output += `<body><h1>Server running on port ${portToList}</h1>\n`;
+    output += `<p>Connect with the <b>gaem_js_client</b></p>\n`;
+    output += `<p>Logs:</p><table><tr><th>Time</th><th>Message</th></tr>\n`;
+
+    logMessages.slice(-10).reverse().forEach(e => {
+        output += `<tr><td><b>[${e.t.toISOString().replace('T', ' ').slice(0, -5)}]</b></td><td>`;
+        output += `${escapeHtml(e.m)}</td></tr>\n`
     });
-    output += "</ul>";
+    output += "</table>\n</body>\n</html>";
     res.send(output);
 });
 
-app.listen(8081, () => {
+app.listen(portToList, () => {
     readLogFile();
     readGameState();
-    log('Listening on port 8081.');
+    log('Listening on port ' + portToList + '.');
 });
