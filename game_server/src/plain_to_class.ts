@@ -23,9 +23,19 @@ THE SOFTWARE.
 */
 
 /**
- * Copied from https://github.com/typestack/class-transformer.git
- * and concatenated into a single file with some type issues fixed and minor tweaks
- */
+Copied from https://github.com/typestack/class-transformer.git
+and concatenated into a single file with some type issues fixed and minor
+tweaks.
+
+If Reflect.getMetadata() is not found install the following:
+
+    $ npm i --save @types/reflect-metadata
+
+I feel that much of this code and complexity is unnecessary in my limited
+usecase but I haven't yet cared enough to prune it.
+
+--Riku R. 2020-04-05
+*/
 
 import 'reflect-metadata'
 
@@ -291,9 +301,9 @@ export class MetadataStorage {
 
     getStrategy(target: Function): "excludeAll" | "exposeAll" | "none" {
         const excludeMap = this._excludeMetadatas.get(target);
-        const exclude = !!excludeMap // && excludeMap.get(undefined);
+        const exclude = !!excludeMap // && excludeMap.get(undefined); modern typescript this
         const exposeMap = this._exposeMetadatas.get(target);
-        const expose = !!exposeMap // && exposeMap.get(undefined);
+        const expose = !!exposeMap // && exposeMap.get(undefined); modern typescript allow this
         if ((exclude && expose) || (!exclude && !expose)) return "none";
         return exclude ? "excludeAll" : "exposeAll";
     }
