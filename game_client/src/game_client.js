@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { GameCanvas } from './game_canvas'
 
-const screenBorders = { top: 0, bottom: 8, left: 0, right: 20 };
+const screenBorders = { top: -10, bottom: 10, left: -20, right: 20 };
 
 const isWithinScreenBorders = (x, y) => {
   const { top, bottom, left, right } = screenBorders;
@@ -29,6 +30,8 @@ const PixelDiv = (props) => {
   );
 };
 
+
+/*
 const TileDiv = (props) => {
   const { x, y } = props;
   const { px, py } = tilePixelPos(x, y);
@@ -74,6 +77,7 @@ const Bullet = (props) => {
   );
 
 };
+*/
 
 const MovePlayerButtons = (props) => {
   const { onMove, onShoot } = props;
@@ -185,11 +189,14 @@ export default class App extends Component {
     }
 
     let player = this.state.gameState.players[playerIndex];
-    player.x += dx;
-    player.y += dy;
+    let newX = player.x + dx;
+    let newY = player.y + dy;
 
-    if (!isWithinScreenBorders(player.x, player.y))
+    if (!isWithinScreenBorders(newX, newY))
       return;
+
+    player.x = newX;
+    player.y = newY;
 
     if (dx !== 0)
       player.facing = dx < 0 ? 2 : 3;
@@ -251,7 +258,6 @@ export default class App extends Component {
           !gameState && !this._updating &&
           <p>Couldn't fetch game state. Is the server running?</p>
         }
-
         {
           gameState &&
           <AddNewPlayerForm onSubmit={this.makePlayer} />
@@ -265,13 +271,18 @@ export default class App extends Component {
         }
         {
           gameState &&
-          gameState.players.map(p => <Player player={p} key={p.playerKey} />)
-        }
-        {
-          gameState &&
-          gameState.bullets.map(b => <Bullet bullet={b} key={b.bulletKey} />)
+          <GameCanvas gameState={gameState} />
         }
       </div>
     );
+
+    //{
+    //  gameState &&
+    //  gameState.players.map(p => <Player player={p} key={p.playerKey} />)
+    //}
+    //{
+    //  gameState &&
+    //  gameState.bullets.map(b => <Bullet bullet={b} key={b.bulletKey} />)
+    //}
   }
 }
