@@ -155,8 +155,8 @@ app.post('/makeBullet', (req, res) => {
     if (gameState.bullets.length >= maxBulletCount)
         gameState.bullets.splice(0, gameState.bullets.length - maxBulletCount);
 
-    const treshold = 10000;
-    gameState.bullets = gameState.bullets.filter((b: Bullet) => Date.now() - b.startTime < treshold);
+    const threshold = 10000;
+    gameState.bullets = gameState.bullets.filter((b: Bullet) => Date.now() - b.startTime < threshold);
 
     let bullet: Bullet = req.body;
     bullet.bulletKey = gameState.runningBulletId++
