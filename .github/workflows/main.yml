@@ -34,4 +34,4 @@ jobs:
       
       # Do the things
       - name: Docker configuration
-      - run: ./docker_build.sh
+        run: ./docker_build.sh
