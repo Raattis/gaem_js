@@ -19,3 +19,7 @@ To rerun either client or server rerun the corresponding `./docker_run_*.sh` scr
 
 # Running without docker
 Do `npm install` in both `game_server` and `game_client` folders and then run the `./start_server.sh` and `./start_client.sh` scripts at the root folder. The port of the `proxy` address may need to be adjusted in `./game_client/package.json` for this to work properly.
+
+# Videos of it running at couple stages of development
+https://youtu.be/0tBhmuH0EVs
+https://youtu.be/3oMQVbJPLfI
