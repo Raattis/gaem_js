@@ -14,3 +14,5 @@ In another terminal window
 ```sh
 ./docker_run_client.sh
 ```
+
+To rerun either client or server rerun the corresponding `./docker_run_*.sh` script.
